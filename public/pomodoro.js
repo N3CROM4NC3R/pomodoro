@@ -1,5 +1,28 @@
 let intervalId;
 
+function getFocusMinutes(){
+    return document.getElementById("focus-minutes").value;
+}
+
+
+function getBreakMinutes(){
+    return document.getElementById("break-minutes").value;
+}
+
+function getLongBreakMinutes(){
+    return document.getElementById("long-break-minutes").value;
+}
+
+function getBeforeLongBreak(){
+    return document.getElementById("before-long-break").value;
+}
+
+function getFocusTime(){
+    let minutes = getFocusMinutes();
+    return `${minutes}:00`;
+}
+
+
 function startCountdown() {
   intervalId = setInterval(updateCount, 1000);
 }
@@ -21,7 +44,7 @@ function updateCount() {
 
 function resetCountdown() {
   const count = document.getElementById("pomodoro-count");
-  count.textContent = "25:00";
+  count.textContent = getFocusTime();
   stopCountdown();
   const button = document.querySelector("#pomodoro-button .fa-solid");
   if (button.classList.contains("fa-pause")) {
@@ -60,3 +83,21 @@ buttonContainer.addEventListener("click", handleButtonClick);
 resetContainer = document.getElementById("pomodoro-reset");
 resetContainer.addEventListener("click",resetCountdown);
 
+function settingsButtonEvent(){
+    element = document.getElementById("settings");
+    if (element.classList.contains("settings-active")) {
+        element.classList.remove("settings-active");
+        element.classList.add("settings-desactive");
+    } else {
+        element.classList.remove("settings-desactive");
+
+        element.classList.add("settings-active");
+    }
+}
+settingsButton = document.getElementById("settings-button");
+settingsButton.addEventListener("click",settingsButtonEvent);
+
+
+focusMinutesInput = document.getElementById("focus-minutes");
+
+focusMinutesInput.addEventListener("change",resetCountdown);

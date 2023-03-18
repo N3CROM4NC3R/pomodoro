@@ -38,7 +38,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <button class="nav-link custom-nav-link settings-button" id="settings-button">Settings</button>
+                        </li>
                         @guest
+
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link custom-nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
