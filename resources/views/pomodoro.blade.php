@@ -10,6 +10,12 @@
 
     </div> --}}
     <div class="pomodoro mx-auto">
+        <div class="pomodoro__mode text-white text-center" id="pomodoro-mode">
+            Focus
+        </div>
+        <div class="pomodoro__cycle-count text-white text-center" id="pomodoro-cycle">
+            1/4
+        </div>
         <div class="pomodoro__count text-white text-center" id="pomodoro-count">
             25:00
         </div>
@@ -40,9 +46,9 @@
         </div>
         <div class="settings__form-group d-flex justify-content-center align-items-end">
             <label class="settings__label form-label text-white mb-0">Pomodoros before long break</label>
-            <input class="settings__input form-control" id="before-long-break" type="number" min="1" value="1" minlength="1">
+            <input class="settings__input form-control" id="before-long-break" type="number" min="1" value="4" minlength="1">
         </div>
     </div>
-    <script src="pomodoro.js"></script>
+    <script src="pomodoro.js" type="module"></script>
 
 @endsection
