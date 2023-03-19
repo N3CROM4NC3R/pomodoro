@@ -1,5 +1,5 @@
 
-import { getFocusMinutes, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes } from "./utils.js";
+import { getFocusMinutes, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes,subtractOneSecond } from "./utils.js";
 
 const modes = {
     "FOCUS":0,
@@ -7,10 +7,9 @@ const modes = {
     "LONG_BREAK":2
 };
 
-
 let intervalId;
 let currentMode = modes["FOCUS"];
-let cycleCount = 1; // añadir un contador de ciclos
+let cycleCount = 1;
 
 function getFocusTime(){
     let minutes = getFocusMinutes();
@@ -19,49 +18,47 @@ function getFocusTime(){
 
 function getBreakTime(){
     let minutes;
-    if (cycleCount == getBeforeLongBreak()) { // si se ha completado el número de ciclos antes del descanso largo
-      minutes = getLongBreakMinutes(); // usar el tiempo de descanso largo
+    if (isCycleLimit()) {
+      minutes = getLongBreakMinutes();
     } else {
-      minutes = getBreakMinutes(); // usar el tiempo de descanso normal
+      minutes = getBreakMinutes();
     }
     return `${minutes}:00`;
 }
+function openPomodoroButton(){
+    const button = document.querySelector("#pomodoro-button .fa-solid");
+    button.classList.remove("fa-pause");
+    button.classList.add("fa-play");
+}
 
+function closePomodoroButton(){
+    const button = document.querySelector("#pomodoro-button .fa-solid");
+    button.classList.remove("fa-play");
+    button.classList.add("fa-pause");
+}
 
 function startCountdown() {
-  intervalId = setInterval(updateCount, 1000);
+
+    intervalId = setInterval(updateCount, 1000);
+}
+
+function isCycleLimit() {
+    return cycleCount == getBeforeLongBreak();
 }
 
 function stopCountdown() {
-  clearInterval(intervalId);
+    clearInterval(intervalId);
 }
 
 function updateCount() {
-  const count = document.getElementById("pomodoro-count");
-  let countNumber = count.textContent;
-  if (countNumber === "00:00") {
-    changeFocusOrBreak();
-
-  } else {
-    countNumber = subtractOneSecond(countNumber);
-    count.textContent = countNumber;
-  }
-}
-
-function resetCountdown() {
     const count = document.getElementById("pomodoro-count");
+    let countNumber = count.textContent;
+    if (countNumber === "00:00") {
+        changeFocusOrBreak();
 
-    if(currentMode === modes["BREAK"] || currentMode === modes["LONG_BREAK"] ){
-        count.textContent = getBreakTime();
-    }else{
-        count.textContent = getFocusTime();
-    }
-
-    stopCountdown();
-    const button = document.querySelector("#pomodoro-button .fa-solid");
-    if (button.classList.contains("fa-pause")) {
-        button.classList.remove("fa-pause");
-        button.classList.add("fa-play");
+    } else {
+        countNumber = subtractOneSecond(countNumber);
+        count.textContent = countNumber;
     }
 }
 
@@ -70,19 +67,19 @@ function changeFocusOrBreak(){
 
     const count = document.getElementById("pomodoro-count");
     const mode = document.getElementById("pomodoro-mode");
-    const cycleCountLimit = getBeforeLongBreak();
-
 
     if(currentMode === modes["FOCUS"]){
         updateCycleCount();
-        if(cycleCount == cycleCountLimit){
+
+        if(isCycleLimit()){
             currentMode = modes["LONG_BREAK"];
             mode.textContent = "Long Break";
         }else{
-            mode.textContent = "Break"
             currentMode = modes["BREAK"];
+            mode.textContent = "Break"
         }
         count.textContent = getBreakTime();
+
     }else{
         if(currentMode == modes["LONG_BREAK"]){
             updateCycleCount();
@@ -92,14 +89,30 @@ function changeFocusOrBreak(){
         count.textContent = getFocusTime();
     }
 
-
     changePomodoroButton();
 }
 
-function updateCycleCount() {
-    let cycleCountLimit = getBeforeLongBreak();
+function resetCountdown() {
+    stopCountdown();
 
-    if(cycleCount == cycleCountLimit){
+    const countContainer = document.getElementById("pomodoro-count");
+
+    if(currentMode === modes["BREAK"] || currentMode === modes["LONG_BREAK"] ){
+        countContainer.textContent = getBreakTime();
+    }else{
+        countContainer.textContent = getFocusTime();
+    }
+
+    const button = document.querySelector("#pomodoro-button .fa-solid");
+    if (button.classList.contains("fa-pause")) {
+        openPomodoroButton();
+    }
+}
+
+
+function updateCycleCount() {
+
+    if(isCycleLimit()){
         cycleCount = 1;
     }else{
         cycleCount++;
@@ -110,27 +123,16 @@ function updateCycleCount() {
     cycleCountContainer.textContent = cycleCountText;
 }
 
-function subtractOneSecond(time) {
-  const [minutes, seconds] = time.split(":");
-  const date = new Date();
-  date.setMinutes(minutes);
-  date.setSeconds(seconds);
-  date.setSeconds(date.getSeconds() - 1);
-  const newMinutes = date.getMinutes().toString().padStart(2, "0");
-  const newSeconds = date.getSeconds().toString().padStart(2, "0");
-  return `${newMinutes}:${newSeconds}`;
-}
+
 
 function changePomodoroButton() {
   const button = document.querySelector("#pomodoro-button .fa-solid");
   if (button.classList.contains("fa-play")) {
     startCountdown();
-    button.classList.remove("fa-play");
-    button.classList.add("fa-pause");
+    openPomodoroButton();
   } else {
     stopCountdown();
-    button.classList.remove("fa-pause");
-    button.classList.add("fa-play");
+    closePomodoroButton();
   }
 }
 
