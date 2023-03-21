@@ -38,9 +38,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        <li class="nav-item">
-                            <button class="nav-link custom-nav-link settings-button" id="settings-button">Settings</button>
-                        </li>
+                        @if (Route::is("pomodoro"))
+                            <li class="nav-item">
+                                <button class="nav-link custom-nav-link settings-button" id="settings-button">Settings</button>
+                            </li>
+                        @endif
                         @guest
 
                             @if (Route::has('login'))

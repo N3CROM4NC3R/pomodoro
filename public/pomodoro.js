@@ -8,21 +8,16 @@ const modes = {
 };
 
 let intervalId;
-let currentMode = modes["FOCUS"];
+let currentMode = modes.FOCUS;
 let cycleCount = 1;
 
 function getFocusTime(){
-    let minutes = getFocusMinutes();
+    const minutes = getFocusMinutes();
     return `${minutes}:00`;
 }
 
 function getBreakTime(){
-    let minutes;
-    if (isCycleLimit()) {
-      minutes = getLongBreakMinutes();
-    } else {
-      minutes = getBreakMinutes();
-    }
+    const minutes = isCycleLimit() ? getLongBreakMinutes() : getBreakMinutes();
     return `${minutes}:00`;
 }
 function openPomodoroButton(){
@@ -68,23 +63,23 @@ function changeFocusOrBreak(){
     const count = document.getElementById("pomodoro-count");
     const mode = document.getElementById("pomodoro-mode");
 
-    if(currentMode === modes["FOCUS"]){
+    if(currentMode === modes.FOCUS){
         updateCycleCount();
 
         if(isCycleLimit()){
-            currentMode = modes["LONG_BREAK"];
+            currentMode = modes.LONG_BREAK;
             mode.textContent = "Long Break";
         }else{
-            currentMode = modes["BREAK"];
-            mode.textContent = "Break"
+            currentMode = modes.BREAK;
+            mode.textContent = "Break";
         }
         count.textContent = getBreakTime();
 
     }else{
-        if(currentMode == modes["LONG_BREAK"]){
+        if(currentMode == modes.LONG_BREAK){
             updateCycleCount();
         }
-        currentMode = modes["FOCUS"];
+        currentMode = modes.FOCUS;
         mode.textContent = "Focus";
         count.textContent = getFocusTime();
     }
@@ -97,7 +92,7 @@ function resetCountdown() {
 
     const countContainer = document.getElementById("pomodoro-count");
 
-    if(currentMode === modes["BREAK"] || currentMode === modes["LONG_BREAK"] ){
+    if(currentMode === modes.BREAK || currentMode === modes.LONG_BREAK ){
         countContainer.textContent = getBreakTime();
     }else{
         countContainer.textContent = getFocusTime();
@@ -128,11 +123,12 @@ function updateCycleCount() {
 function changePomodoroButton() {
   const button = document.querySelector("#pomodoro-button .fa-solid");
   if (button.classList.contains("fa-play")) {
+
     startCountdown();
-    openPomodoroButton();
-  } else {
-    stopCountdown();
     closePomodoroButton();
+} else {
+    stopCountdown();
+    openPomodoroButton();
   }
 }
 
