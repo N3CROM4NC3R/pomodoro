@@ -23,9 +23,9 @@ return new class extends Migration
 
             $table->id();
             $table->string("color", 7)->default("#FFFFFF");
-            $table->timestamp("focus_time")->default($focus_time);
-            $table->timestamp("long_break_time")->default($long_break_time);
-            $table->timestamp("break_time")->default($break_time);
+            $table->integer("focus_time")->default($focus_time);
+            $table->integer("long_break_time")->default($long_break_time);
+            $table->integer("break_time")->default($break_time);
             $table->integer("pomodoro_count")->default($pomodoro_count);
 
 
