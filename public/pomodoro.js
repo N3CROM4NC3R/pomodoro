@@ -83,8 +83,13 @@ function changeFocusOrBreak(){
         mode.textContent = "Focus";
         count.textContent = getFocusTime();
     }
-
+    notification();
     changePomodoroButton();
+}
+
+function notification(){
+     const audio = new Audio("sound.ogg");
+     audio.play();
 }
 
 function resetCountdown() {
@@ -112,7 +117,7 @@ function updateCycleCount() {
     }else{
         cycleCount++;
     }
-
+    let cycleCountLimit = getBeforeLongBreak();
     let cycleCountText = `${cycleCount}/${cycleCountLimit}`;
     let cycleCountContainer = document.getElementById("pomodoro-cycle");
     cycleCountContainer.textContent = cycleCountText;
