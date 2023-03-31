@@ -19,7 +19,7 @@
     <script src="https://kit.fontawesome.com/5e4402aed6.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="app">
         <nav class="navbar navbar-expand custom-navbar">
             <div class="container">
                 <a class="navbar-brand custom-navbar-brand" href="{{ url('/') }}">
@@ -83,6 +83,12 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <div class="bottom d-flex justify-content-center align-items-center">
+            <div class="bottom__content">
+                <p> To focus better by </p>
+                <a href="#">N3CR0M4NC3R</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
