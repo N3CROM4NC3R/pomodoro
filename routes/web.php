@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PomodoroController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pomodoro');
 })->name("pomodoro");
+
+Route::middleware(["auth","auth.session"])->group(function(){
+    Route::put("/pomodoro",[PomodoroController::class, "update"]);
+    Route::get("/pomodoro",[PomodoroController::class, "show"]);
+});
 
 Auth::routes();
 
