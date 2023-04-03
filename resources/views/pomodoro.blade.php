@@ -49,6 +49,10 @@
             <input class="settings__input form-control" id="before-long-break" type="number" min="1" value="4" minlength="1">
         </div>
     </div>
-    <script src="pomodoro.js" type="module"></script>
 
+@endsection
+
+
+@section ("bottom-scripts")
+    <script src="/js/pomodoro/pomodoro.js" type="module"></script>
 @endsection

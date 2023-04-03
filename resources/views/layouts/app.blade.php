@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
+    <script src="js/vendor/axios.js"></script>
     <link href="styles.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5e4402aed6.js" crossorigin="anonymous"></script>
 </head>
@@ -89,6 +89,9 @@
                 <a href="#">N3CR0M4NC3R</a>
             </div>
         </div>
+    </div>
+    <div>
+        @yield ("bottom-scripts")
     </div>
 </body>
 </html>
