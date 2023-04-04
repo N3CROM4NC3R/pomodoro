@@ -1,5 +1,5 @@
 
-import { getFocusMinutes, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes,subtractOneSecond } from "./utils.js";
+import { getFocusTime, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes,subtractOneSecond } from "../helpers/utils.js";
 
 const modes = {
     "FOCUS":0,
@@ -11,10 +11,6 @@ let intervalId;
 let currentMode = modes.FOCUS;
 let cycleCount = 1;
 
-function getFocusTime(){
-    const minutes = getFocusMinutes();
-    return `${minutes}:00`;
-}
 
 function getBreakTime(){
     const minutes = isCycleLimit() ? getLongBreakMinutes() : getBreakMinutes();

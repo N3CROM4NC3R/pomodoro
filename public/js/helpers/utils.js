@@ -26,5 +26,11 @@ function subtractOneSecond(time) {
     return `${newMinutes}:${newSeconds}`;
   }
 
+function getFocusTime(){
+    const minutes = getFocusMinutes();
+    return `${minutes}:00`;
+}
 
-export {getFocusMinutes, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes, subtractOneSecond};
+
+
+export {getFocusTime, getFocusMinutes, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes, subtractOneSecond};

@@ -10,7 +10,7 @@ export async function getSettings() {
     return GET(`${POMODORO_URL}`);
 }
 
-export async function editSettings() {
-    return PUT(`${POMODORO_URL}`);
+export async function editSettings(data) {
+    return PUT(`${POMODORO_URL}`,data);
 }
 

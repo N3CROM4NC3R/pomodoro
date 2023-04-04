@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('pomodoros', function (Blueprint $table) {
             //the default focus time is 25 minutes
-            $focus_time = 25 * 60;
+            $focus_time = 25;
             // The default long break time is 15 minutes
-            $long_break_time = 15 * 60;
+            $long_break_time = 15;
             // The default short break time is 5 minutes
-            $break_time = 5 * 60;
+            $break_time = 5;
             $pomodoro_count = 4;
 
 
