@@ -73,7 +73,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        Pomodoro::factory()->create(["user_id" => $user->id]);
+        Pomodoro::factory()->create([
+            "focus_time" => 25,
+            "long_break_time" => 15,
+            "break_time" => 5,
+            "pomodoro_count" => 4,
+            "user_id" => $user->id
+        ]);
 
         return $user;
     }

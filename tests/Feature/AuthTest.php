@@ -32,6 +32,10 @@ class AuthTest extends TestCase
         $user = User::all()->first();
 
         $this->assertDatabaseHas('pomodoros', [
+            "focus_time" => 25,
+            "long_break_time" => 15,
+            "break_time" => 5,
+            "pomodoro_count" => 4,
             'user_id' => 1,
         ]);
     }
