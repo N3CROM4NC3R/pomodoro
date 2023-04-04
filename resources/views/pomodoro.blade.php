@@ -48,6 +48,7 @@
             <label class="settings__label form-label text-white mb-0">Pomodoros before long break</label>
             <input class="settings__input form-control" id="before-long-break" type="number" min="1" value="4" minlength="1">
         </div>
+        <button type="submit" class="custom-btn" id="save-configuration">Save</button>
     </div>
 
 @endsection
@@ -55,4 +56,6 @@
 
 @section ("bottom-scripts")
     <script src="/js/pomodoro/pomodoro.js" type="module"></script>
+    <script src="/js/settings/settings.js" type="module"></script>
+
 @endsection

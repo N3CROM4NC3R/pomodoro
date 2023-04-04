@@ -61,7 +61,7 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle custom-nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
+                                <input name="is-logged" type="hidden" id="is-logged" value="true"/>
                                 <div class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item custom-dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

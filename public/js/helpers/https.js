@@ -4,7 +4,9 @@ export default async function POST(url, params) {
 }
 
 export async function GET(url) {
+    console.log("Hello");
     const res = await axios.get(url);
+    console.log(res.data);
     return res.data;
 }
 

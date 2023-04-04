@@ -28,7 +28,7 @@ body{
     border-radius:10px;
 }
 
-.login__ingresar-btn{
+.custom-btn{
     border-radius:10px;
     background-color:#5D3891;
     color:#FFFFFF;
@@ -37,6 +37,9 @@ body{
     padding-right: 50px;
     padding-top: 8px;
     padding-bottom: 8px;
+    border:0;
+    margin:10px auto 0px auto;
+    display:block;
 }
 
 .login__ingresar-btn:hover{

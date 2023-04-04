@@ -62,7 +62,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn login__ingresar-btn">
+                                <button type="submit" class="btn custom-btn">
                                     {{ __('Register') }}
                                 </button>
                                 @if (Route::has('login'))

@@ -12,6 +12,6 @@ class Pomodoro extends Model
     protected $guarded = ["id","update_at","created_at"];
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,"user_id");
     }
 }

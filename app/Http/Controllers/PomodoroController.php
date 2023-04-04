@@ -31,7 +31,6 @@ class PomodoroController extends Controller
         $user = Auth::user();
 
         $pomodoro = $user->pomodoro;
-
         return $pomodoro;
     }
 
