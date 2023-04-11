@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 
 
 use Tests\TestCase;
-use App\Models\Pomodoro;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,15 +26,15 @@ class PomodoroTest extends TestCase
 
     public function test_pomodoro_factory(): void
     {
-        $pomodoro = Pomodoro::factory()->create();
+        $setting = Setting::factory()->create();
 
-        $this->assertDatabaseHas('pomodoros',[
-            "color" => $pomodoro->color,
-            "focus_time" => $pomodoro->focus_time,
-            "long_break_time" => $pomodoro->long_break_time,
-            "break_time" => $pomodoro->break_time,
-            "pomodoro_count" => $pomodoro->pomodoro_count,
-            "user_id" => $pomodoro->user->id
+        $this->assertDatabaseHas('settings',[
+            "color" => $setting->color,
+            "focus_time" => $setting->focus_time,
+            "long_break_time" => $setting->long_break_time,
+            "break_time" => $setting->break_time,
+            "pomodoro_count" => $setting->pomodoro_count,
+            "user_id" => $setting->user->id
         ]);
     }
 
@@ -43,29 +43,29 @@ class PomodoroTest extends TestCase
 
         $user = $this->login();
 
-        $pomodoro = Pomodoro::factory()->create(["user_id" => $user->id]);
+        $setting = Setting::factory()->create(["user_id" => $user->id]);
 
-        $new_pomodoro = Pomodoro::factory()->raw();
+        $new_setting = Setting::factory()->raw();
 
         $data = [
-            "color" => $new_pomodoro["color"],
-            "focus_time" => $new_pomodoro["focus_time"],
-            "long_break_time" => $new_pomodoro["long_break_time"],
-            "break_time" => $new_pomodoro["break_time"],
-            "pomodoro_count" => $new_pomodoro["pomodoro_count"],
+            "color" => $new_setting["color"],
+            "focus_time" => $new_setting["focus_time"],
+            "long_break_time" => $new_setting["long_break_time"],
+            "break_time" => $new_setting["break_time"],
+            "pomodoro_count" => $new_setting["pomodoro_count"],
         ];
 
-        $response = $this->putJson("pomodoro", $data);
+        $response = $this->putJson("setting", $data);
 
         $response->assertStatus(204);
 
-        $this->assertDatabaseHas("pomodoros",[
-            "id" => $pomodoro->id,
-            "focus_time" => $new_pomodoro["focus_time"],
-            "long_break_time" => $new_pomodoro["long_break_time"],
-            "break_time" => $new_pomodoro["break_time"],
-            "pomodoro_count" => $new_pomodoro["pomodoro_count"],
-            "user_id" => $pomodoro->user_id
+        $this->assertDatabaseHas("settings",[
+            "id" => $setting->id,
+            "focus_time" => $new_setting["focus_time"],
+            "long_break_time" => $new_setting["long_break_time"],
+            "break_time" => $new_setting["break_time"],
+            "pomodoro_count" => $new_setting["pomodoro_count"],
+            "user_id" => $setting->user_id
             ]
         );
     }
@@ -74,15 +74,15 @@ class PomodoroTest extends TestCase
     public function test_user_can_request_pomodoro_configuration(){
         $user = $this->login();
 
-        $pomodoro = Pomodoro::factory()->create(["user_id" => $user->id]);
-        $response = $this->getJson("pomodoro");
+        $setting = Setting::factory()->create(["user_id" => $user->id]);
+        $response = $this->getJson("setting");
         $response->assertStatus(200);
         $response->assertJsonFragment([
-            "color" => $pomodoro->color,
-            "focus_time" => $pomodoro->focus_time,
-            "long_break_time" => $pomodoro->long_break_time,
-            "break_time" => $pomodoro->break_time,
-            "pomodoro_count" => $pomodoro->pomodoro_count,
+            "color" => $setting->color,
+            "focus_time" => $setting->focus_time,
+            "long_break_time" => $setting->long_break_time,
+            "break_time" => $setting->break_time,
+            "pomodoro_count" => $setting->pomodoro_count,
 
         ]);
 
@@ -93,31 +93,31 @@ class PomodoroTest extends TestCase
 
     public function test_guest_cant_save_pomodoro_configuration(){
 
-        $pomodoro = Pomodoro::factory()->create();
+        $setting = Setting::factory()->create();
 
-        $new_pomodoro = Pomodoro::factory()->raw();
+        $new_setting = Setting::factory()->raw();
 
         $data = [
-            "color" => $new_pomodoro["color"],
-            "focus_time" => $new_pomodoro["focus_time"],
-            "long_break_time" => $new_pomodoro["long_break_time"],
-            "break_time" => $new_pomodoro["break_time"],
-            "pomodoro_count" => $new_pomodoro["pomodoro_count"],
-            "user_id" => $new_pomodoro["user_id"]
+            "color" => $new_setting["color"],
+            "focus_time" => $new_setting["focus_time"],
+            "long_break_time" => $new_setting["long_break_time"],
+            "break_time" => $new_setting["break_time"],
+            "pomodoro_count" => $new_setting["pomodoro_count"],
+            "user_id" => $new_setting["user_id"]
         ];
 
 
-        $response = $this->putJson("pomodoro", $data);
+        $response = $this->putJson("setting", $data);
 
         $response->assertStatus(401);
 
-        $this->assertDatabaseMissing("pomodoros",[
-            "id" => $pomodoro->id,
-            "focus_time" => $new_pomodoro["focus_time"],
-            "long_break_time" => $new_pomodoro["long_break_time"],
-            "break_time" => $new_pomodoro["break_time"],
-            "pomodoro_count" => $new_pomodoro["pomodoro_count"],
-            "user_id" => $pomodoro->user_id
+        $this->assertDatabaseMissing("settings",[
+            "id" => $setting->id,
+            "focus_time" => $new_setting["focus_time"],
+            "long_break_time" => $new_setting["long_break_time"],
+            "break_time" => $new_setting["break_time"],
+            "pomodoro_count" => $new_setting["pomodoro_count"],
+            "user_id" => $setting->user_id
             ]
         );
     }
@@ -125,9 +125,9 @@ class PomodoroTest extends TestCase
 
     public function test_guest_cant_request_pomodoro_configuration(){
 
-        $pomodoro = Pomodoro::factory()->create();
+        $setting = Setting::factory()->create();
 
-        $response = $this->getJson("pomodoro");
+        $response = $this->getJson("setting");
 
         $response->assertStatus(401);
 

@@ -43,8 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function pomodoro():HasOne{
+    public function setting():HasOne{
 
-        return $this->hasOne(Pomodoro::class,"id");
+        return $this->hasOne(Setting::class,"id");
     }
 }

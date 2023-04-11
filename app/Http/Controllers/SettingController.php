@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pomodoro;
+use App\Models\Setting;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
-class PomodoroController extends Controller
+class SettingController extends Controller
 {
     public function index(Request $request){
 
-        return view("pomodoro");
+        return view("setting");
     }
 
 
@@ -21,7 +21,7 @@ class PomodoroController extends Controller
 
         $user = Auth::user();
 
-        $user->pomodoro->update($data);
+        $user->setting->update($data);
 
         return Response('',204);
     }
@@ -30,8 +30,8 @@ class PomodoroController extends Controller
 
         $user = Auth::user();
 
-        $pomodoro = $user->pomodoro;
-        return $pomodoro;
+        $setting = $user->setting;
+        return $setting;
     }
 
 

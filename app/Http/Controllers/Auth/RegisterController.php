@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Models\Pomodoro;
+use App\Models\Setting;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -73,7 +73,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        Pomodoro::factory()->create([
+        Setting::factory()->create([
             "focus_time" => 25,
             "long_break_time" => 15,
             "break_time" => 5,

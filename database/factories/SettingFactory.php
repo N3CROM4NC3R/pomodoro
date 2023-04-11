@@ -8,7 +8,7 @@ use App\Models\User;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pomodoro>
  */
-class PomodoroFactory extends Factory
+class SettingFactory extends Factory
 {
     /**
      * Define the model's default state.
