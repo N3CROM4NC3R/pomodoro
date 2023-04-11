@@ -15,7 +15,7 @@ class AuthTest extends TestCase
 
     use RefreshDatabase;
 
-    public function test_registered_user_has_a_record_in_pomodoro_table(): void
+    public function test_registered_user_has_a_record_in_setting_table(): void
     {
         $user = User::factory()->raw();
 

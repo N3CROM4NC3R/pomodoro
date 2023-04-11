@@ -12,7 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
-class PomodoroTest extends TestCase
+class SettingTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -24,7 +24,7 @@ class PomodoroTest extends TestCase
         return $user;
     }
 
-    public function test_pomodoro_factory(): void
+    public function test_setting_factory(): void
     {
         $setting = Setting::factory()->create();
 
@@ -39,7 +39,7 @@ class PomodoroTest extends TestCase
     }
 
 
-    public function test_user_can_save_pomodoro_configuration(){
+    public function test_user_can_save_setting(){
 
         $user = $this->login();
 
@@ -71,7 +71,7 @@ class PomodoroTest extends TestCase
     }
 
 
-    public function test_user_can_request_pomodoro_configuration(){
+    public function test_user_can_request_setting(){
         $user = $this->login();
 
         $setting = Setting::factory()->create(["user_id" => $user->id]);
@@ -91,7 +91,7 @@ class PomodoroTest extends TestCase
         ]);
     }
 
-    public function test_guest_cant_save_pomodoro_configuration(){
+    public function test_guest_cant_save_setting(){
 
         $setting = Setting::factory()->create();
 
@@ -123,7 +123,7 @@ class PomodoroTest extends TestCase
     }
 
 
-    public function test_guest_cant_request_pomodoro_configuration(){
+    public function test_guest_cant_request_setting(){
 
         $setting = Setting::factory()->create();
 
