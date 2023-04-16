@@ -20,6 +20,10 @@ Route::get('/', function () {
 Route::middleware(["auth","auth.session"])->group(function(){
     Route::put("/setting",[SettingController::class, "update"]);
     Route::get("/setting",[SettingController::class, "show"]);
+
+    Route::get("/pomodoro/{mode}",[App\Http\Controllers\PomodoroController::class, 'index'])->whereAlpha("mode");
+    Route::post("/pomodoro",[App\Http\Controllers\PomodoroController::class, 'create']);
+
 });
 
 Auth::routes();
