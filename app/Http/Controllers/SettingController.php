@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SettingsUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use GuzzleHttp\Psr7\Response;
@@ -16,8 +17,8 @@ class SettingController extends Controller
     }
 
 
-    public function update(Request $request){
-        $data = $request->all();
+    public function update(SettingsUpdateRequest $request){
+        $data = $request->validated();
 
         $user = Auth::user();
 

@@ -11,6 +11,4 @@ class Pomodoro extends Model
 
     protected $fillable = ["focus_time","user_id"];
 
-
-
 }

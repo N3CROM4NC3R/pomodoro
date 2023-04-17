@@ -70,6 +70,37 @@ class SettingTest extends TestCase
         );
     }
 
+    public function test_user_cant_save_setting_with_wrong_data(){
+
+        $user = $this->login();
+
+        $setting = Setting::factory()->create(["user_id" => $user->id]);
+
+        $new_setting = Setting::factory()->raw();
+
+        $data = [
+            "color" => "This is a test",
+            "focus_time" => "This is a test",
+            "long_break_time" => "This is a test",
+            "break_time" => "This is a test",
+            "pomodoro_count" => "This is a test",
+        ];
+
+        $response = $this->putJson("setting", $data);
+
+        $response->assertStatus(422);
+
+        $this->assertDatabaseMissing("settings",[
+            "id" => $data["color"],
+            "focus_time" => $data["focus_time"],
+            "long_break_time" => $data["long_break_time"],
+            "break_time" => $data["break_time"],
+            "pomodoro_count" => $data["pomodoro_count"],
+            "user_id" => $setting->user_id
+            ]
+        );
+    }
+
 
     public function test_user_can_request_setting(){
         $user = $this->login();
