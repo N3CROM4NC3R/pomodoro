@@ -24,7 +24,7 @@ body{
 .custom-form-input
 
 {
-    background: #F5F5F5;
+    background: #946b6b;
     border-radius:10px;
 }
 
@@ -69,7 +69,10 @@ body{
     line-height: 15px;
     margin-left: 15px;
     font-weight:900;
-    font-size:15px;
+    font-size:20px;
+    width:min-content;
+    padding:7px 6px 7px 6px;
+    margin-top: 15px;
 }
 
 .custom-dropdown-item{
@@ -106,7 +109,9 @@ body{
     border-radius:100%;
 }
 
-
+.custom-toggler{
+    font-size:37px;
+}
 .pomodoro__count{
     font-size:40px;
 }

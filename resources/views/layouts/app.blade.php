@@ -20,13 +20,13 @@
 </head>
 <body>
     <div id="app" class="app">
-        <nav class="navbar navbar-expand custom-navbar">
+        <nav class="navbar navbar-expand-lg custom-navbar">
             <div class="container">
                 <a class="navbar-brand custom-navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Pomo') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler custom-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -41,6 +41,9 @@
                         @if (Route::is("pomodoro"))
                             <li class="nav-item">
                                 <button class="nav-link custom-nav-link settings-button" id="settings-button">Settings</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link custom-nav-link settings-button" id="statistics-button">Statistics</button>
                             </li>
                         @endif
                         @guest
