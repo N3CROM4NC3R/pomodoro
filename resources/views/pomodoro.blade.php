@@ -30,7 +30,9 @@
     </div>
 
     <div class="settings" id="settings">
-
+        <div class="settings__close-button text-white d-flex justify-content-end" id="settings-close">
+            <i class="fa-sharp fa-solid fa-xmark"></i>
+        </div>
         <h1 class="settings__pomodoro text-white text-center">Pomodoro</h1>
         <div class="settings__form-group d-flex justify-content-center align-items-end mb-3">
             <label class="settings__label form-label text-white mb-0">Focus minutes</label>
@@ -51,11 +53,41 @@
         <button type="submit" class="custom-btn" id="save-configuration">Save</button>
     </div>
 
+    <div class="statistics mx-auto my-auto" id="stats-modal">
+        @guest
+        <div class="statistics__login-reminder">
+            Watch your statistics by login<br/>
+            <a class="custom-btn" href="/login">Login</a>
+        </div>
+        @else
+        <div class="statistics__title text-white text-center">Statistics</div>
+        <div class="statistics__button-group d-flex justify-content-between">
+            <button class="statistics__button custom-btn">Daily</button>
+            <button class="statistics__button custom-btn">Weekly</button>
+            <button class="statistics__button custom-btn">Monthly</button>
+        </div>
+
+        <div class="statistics__stats" style=";position:relative;width:320px;height:500px;">
+            <canvas class="statistics__canvas" id="stats-canvas"></canvas>
+        </div>
+
+        <div class="statistics__summary">
+        </div>
+        @endguest
+    </div>
+
 @endsection
 
 
 @section ("bottom-scripts")
     <script src="/js/pomodoro/pomodoro.js" type="module"></script>
     <script src="/js/settings/settings.js" type="module"></script>
+    <script src="/js/pomodoro/statsModal.js" type="module"></script>
+
+    @auth
+    <script src="/js/pomodoro/statistics.js" type="module"></script>
+
+    @endauth
+
 
 @endsection

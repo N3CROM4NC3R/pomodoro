@@ -31,6 +31,15 @@ function getFocusTime(){
     return `${minutes}:00`;
 }
 
+function getDayHours(){
+    let hours = new Array();
+    let today = new Date().toISOString().slice(0, 10);
+    for(let i = 0;i<24;i++){
+        let hour = `${i}`.padStart(2,"0");
+        hours.push(`${today}T${hour}:00:00Z`);
+    }
 
+    return hours;
+}
 
-export {getFocusTime, getFocusMinutes, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes, subtractOneSecond};
+export {getFocusTime, getFocusMinutes, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes, subtractOneSecond,getDayHours};

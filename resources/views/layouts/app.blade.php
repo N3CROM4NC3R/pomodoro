@@ -17,6 +17,11 @@
     <script src="js/vendor/axios.js"></script>
     <link href="styles.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5e4402aed6.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
 </head>
 <body>
     <div id="app" class="app">

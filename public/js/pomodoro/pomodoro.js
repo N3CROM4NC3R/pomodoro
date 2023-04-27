@@ -1,5 +1,7 @@
 
-import { getFocusTime, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes,subtractOneSecond } from "../helpers/utils.js";
+import { getFocusTime, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes,subtractOneSecond, getFocusMinutes } from "../helpers/utils.js";
+
+import {createStats} from "/js/helpers/requests.js";
 
 const modes = {
     "FOCUS":0,
@@ -41,11 +43,21 @@ function stopCountdown() {
     clearInterval(intervalId);
 }
 
+function savePomodoro(){
+    let focusTime =  parseInt(getFocusMinutes());
+    let data = {
+        "focus_time" : focusTime
+    };
+    createStats(data);
+}
+
+
 function updateCount() {
     const count = document.getElementById("pomodoro-count");
     let countNumber = count.textContent;
     if (countNumber === "00:00") {
         changeFocusOrBreak();
+        savePomodoro();
 
     } else {
         countNumber = subtractOneSecond(countNumber);
@@ -152,6 +164,11 @@ function settingsButtonEvent(){
 }
 let settingsButton = document.getElementById("settings-button");
 settingsButton.addEventListener("click",settingsButtonEvent);
+
+
+let closeSettingsButton = document.getElementById("settings-close");
+closeSettingsButton.addEventListener("click",settingsButtonEvent);
+
 
 
 let focusMinutesInput = document.getElementById("focus-minutes");
