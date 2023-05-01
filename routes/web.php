@@ -24,6 +24,9 @@ Route::middleware(["auth","auth.session"])->group(function(){
     Route::get("/pomodoro/{mode}",[App\Http\Controllers\PomodoroController::class, 'index'])->whereAlpha("mode");
     Route::post("/pomodoro",[App\Http\Controllers\PomodoroController::class, 'create']);
 
+    Route::get("/summary/{mode}",[App\Http\Controllers\PomodoroController::class, 'summary'])->whereAlpha("mode");
+
+
 });
 
 Auth::routes();

@@ -1,7 +1,8 @@
 import {
     POMODORO_URL,
     DAILY_STATS_URL,
-    STATS_URL
+    STATS_URL,
+    DAILY_SUMMARY_URL
 } from "./config.js";
 import POST, { DELETE, PUT, GET } from "./https.js";
 
@@ -23,3 +24,6 @@ export async function createStats(data){
     return POST(`${STATS_URL}`,data);
 }
 
+export async function getDailySummaryData() {
+    return GET(`${DAILY_SUMMARY_URL}`);
+}

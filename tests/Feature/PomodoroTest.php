@@ -114,4 +114,31 @@ class PomodoroTest extends TestCase
 
     }
 
+
+    public function test_user_can_get_summary_daily(){
+        $user = $this->login();
+
+        $pomodoro = Pomodoro::factory()->create(
+            ["user_id" => $user->id]
+        );
+
+        $response = $this->getJson("/summary/daily");
+
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            "total_hours" => $pomodoro->focus_time,
+            "total_pomodoros" => 1,
+        ]);
+
+    }
+
+    public function test_guest_cant_get_summary_daily(){
+        $pomodoro = Pomodoro::factory()->create();
+
+        $response = $this->getJson("/summary/daily");
+
+        $response->assertStatus(401);
+
+    }
+
 }

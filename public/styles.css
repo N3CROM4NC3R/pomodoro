@@ -217,8 +217,22 @@ body{
     height:500px;
     border:#FFFFFF 1px solid;
     border-radius:10px;
-
 }
+
+.statistics__summary{
+    background-color: #810CA8;
+    margin:50px;
+    border-radius:10px;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: bold;
+    padding:10px;
+}
+#stats-pomodoros,
+#stats-time{
+    display: inline-block;
+}
+
 .statistics__login-reminder{
     color:#FFFFFF;
     font-weight: bold;

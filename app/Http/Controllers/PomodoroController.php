@@ -14,7 +14,6 @@ class PomodoroController extends Controller
             case "daily":
 
                 $pomodoros = Pomodoro::where("created_at",">=",today())->get();
-
                 break;
             default:
                 $pomodoros = [];
@@ -35,4 +34,31 @@ class PomodoroController extends Controller
 
         return response('',200);
     }
+
+    public function summary(Request $request, $mode){
+        switch($mode){
+            case "daily":
+
+                $pomodoros = Pomodoro::where("created_at",">=",today())->get();
+
+                $count = $pomodoros->count();
+                $total_hours = 0;
+                $pomodoros->map(function($pomodoro) use (&$total_hours){
+
+                    $total_hours += $pomodoro->focus_time;
+                });
+
+                $data = [
+                    "total_hours" => $total_hours,
+                    "total_pomodoros" => $count
+                ];
+
+                break;
+            default:
+                $data = [];
+        }
+        return $data;
+    }
+
+
 }

@@ -1,5 +1,8 @@
-import {getDailyStats} from "/js/helpers/requests.js";
+import {getDailyStats,getDailySummaryData} from "/js/helpers/requests.js";
 import {getDayHours} from "/js/helpers/utils.js";
+
+let chart = null;
+// Tranform this app to react... it's better.
 
 async function getStats(){
     let data = await getDailyStats();
@@ -7,14 +10,11 @@ async function getStats(){
     return data;
 }
 
-
-
-async function showStatistics(){
+export async function showStatistics(){
     let stats = await getStats();
     let hourResult = stats.map((object)=>{return {"focus_time":object.focus_time,"start_time":object.created_at}});
     let pomodoroData = [];
-    let anotherArray = [];
-
+    let finalData = [];
 
     hourResult.map((object)=>{
         //Create the logic for the data of the chart
@@ -28,14 +28,18 @@ async function showStatistics(){
 
     });
 
-
     let pomodoroHours = Object.keys(pomodoroData);
 
-
     pomodoroHours.forEach((pomodoroHour) => {
-        anotherArray.push({x:pomodoroHour,y:pomodoroData[pomodoroHour]});
+        finalData.push({x:pomodoroHour,y:pomodoroData[pomodoroHour]});
 
     });
+
+    createChart(finalData);
+
+}
+
+function createChart(finalData){
 
     let hours = getDayHours();
     const data = {
@@ -44,7 +48,7 @@ async function showStatistics(){
             {
                 fill:false,
                 label: 'Pomodoros',
-                data: anotherArray,
+                data: finalData,
                 borderColor: 'white',
                 backgroundColor: 'white',
                 lineTension: 0,
@@ -105,9 +109,23 @@ async function showStatistics(){
     };
 
     let ctx = document.getElementById("stats-canvas");
-    new Chart(ctx, config);
+    chart = new Chart(ctx, config);
 
 }
 
+export function destroyStatistics(){
+    chart.destroy();
+}
 
-showStatistics();
+
+export async function updateSummary(){
+
+    let pomodorosElement = document.getElementById("stats-pomodoros");
+    let hoursElement = document.getElementById("stats-time");
+
+    let summaryData = await getDailySummaryData();
+    pomodorosElement.textContent = summaryData.total_pomodoros;
+    hoursElement.textContent = summaryData.total_hours;
+}
+
+

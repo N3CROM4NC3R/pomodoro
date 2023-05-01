@@ -67,11 +67,15 @@
             <button class="statistics__button custom-btn">Monthly</button>
         </div>
 
-        <div class="statistics__stats" style=";position:relative;width:320px;height:500px;">
+        <div class="statistics__stats" style=";position:relative;width:320px;height:160px;">
             <canvas class="statistics__canvas" id="stats-canvas"></canvas>
         </div>
 
         <div class="statistics__summary">
+            <div class="statistics__summary-title">Summary:</div>
+            <div class="statistics__summary-pomodoros">Total pomodoros: <div id="stats-pomodoros">0</div></div>
+            <div class="statistics__summary-time">Total time: <div id="stats-time">0</div></div>
+
         </div>
         @endguest
     </div>
