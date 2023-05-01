@@ -42,4 +42,8 @@ function getDayHours(){
     return hours;
 }
 
-export {getFocusTime, getFocusMinutes, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes, subtractOneSecond,getDayHours};
+function updateCountTitle(count){
+    document.title = `Pomo - ${count}`
+}
+
+export {updateCountTitle, getFocusTime, getFocusMinutes, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes, subtractOneSecond,getDayHours};

@@ -1,5 +1,5 @@
 
-import { getFocusTime } from "../helpers/utils.js";
+import { getFocusTime,updateCountTitle } from "../helpers/utils.js";
 
 import {getSettings,editSettings} from "/js/helpers/requests.js";
 
@@ -28,7 +28,9 @@ if(isLogged){
         pomodoro_count.value = data.pomodoro_count;
 
         const count = document.getElementById("pomodoro-count");
-        count.textContent = getFocusTime();
+        let focusTime = getFocusTime();
+        count.textContent = focusTime;
+        updateCountTitle(focusTime);
     }
 
     saveData(data);
@@ -46,7 +48,7 @@ if(isLogged){
         };
 
         editSettings(data);
-
+        updateCountTitle(focusTime);
         let element = document.getElementById("settings");
         if (element.classList.contains("settings-active")) {
             element.classList.remove("settings-active");

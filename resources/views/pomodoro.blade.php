@@ -1,4 +1,8 @@
 @extends("layouts.app")
+
+@section("title")
+{{  config("APP_NAME","Pomo") }}
+@endsection
 @section("content")
 
     {{-- <div class="pomodoro">

@@ -1,5 +1,5 @@
 
-import { getFocusTime, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes,subtractOneSecond, getFocusMinutes } from "../helpers/utils.js";
+import { updateCountTitle,getFocusTime, getBreakMinutes,getBeforeLongBreak,getLongBreakMinutes,subtractOneSecond, getFocusMinutes } from "../helpers/utils.js";
 
 import {createStats} from "/js/helpers/requests.js";
 
@@ -56,11 +56,14 @@ function updateCount() {
     const count = document.getElementById("pomodoro-count");
     let countNumber = count.textContent;
     if (countNumber === "00:00") {
+        updateCountTitle(countNumber);
         changeFocusOrBreak();
         savePomodoro();
 
+
     } else {
         countNumber = subtractOneSecond(countNumber);
+        updateCountTitle(countNumber);
         count.textContent = countNumber;
     }
 }
