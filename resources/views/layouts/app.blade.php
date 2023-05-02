@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>  @yield("title")  </title>
-
+    <link rel="shortcut icon" href="pomo-logo.ico" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -27,8 +27,8 @@
     <div id="app" class="app">
         <nav class="navbar navbar-expand-lg custom-navbar">
             <div class="container">
-                <a class="navbar-brand custom-navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Pomo') }}
+                <a class="navbar-brand custom-navbar-brand " href="{{ url('/') }}">
+                    <img src="pomo-logo.png" class="me-2" width="40px"/><span class="align-middle">{{ config('app.name', 'Pomo') }}</span>
                 </a>
                 <button class="navbar-toggler custom-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
