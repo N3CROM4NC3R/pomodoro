@@ -64,14 +64,15 @@
             <a class="custom-btn" href="/login">Login</a>
         </div>
         @else
-        <div class="statistics__title text-white text-center">Statistics</div>
+        <div class="statistics__title text-white text-center"> Daily statistics</div>
+{{--
         <div class="statistics__button-group d-flex justify-content-between">
             <button class="statistics__button custom-btn">Daily</button>
             <button class="statistics__button custom-btn">Weekly</button>
             <button class="statistics__button custom-btn">Monthly</button>
-        </div>
+        </div> --}}
 
-        <div class="statistics__stats" style=";position:relative;width:320px;height:160px;">
+        <div class="statistics__stats mt-3" style=";position:relative;width:320px;height:160px;">
             <canvas class="statistics__canvas" id="stats-canvas"></canvas>
         </div>
 
