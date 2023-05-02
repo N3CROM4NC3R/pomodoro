@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section("title")
+{{config("APP_NAME","Pomo") }} - Reset password
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

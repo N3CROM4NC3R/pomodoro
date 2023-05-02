@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+
+@section("title")
+{{config("APP_NAME","Pomo") }} - Registration
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
